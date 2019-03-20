@@ -12,3 +12,7 @@
 ### [SnapKit使用学习](https://www.jianshu.com/p/1f75c89370c2)
 ### [Swift自动布局SnapKit的详细使用介绍](https://www.jianshu.com/p/2bad53a2a180)
 
+### [代码适配Masonry使用的详细介绍](https://www.cnblogs.com/wqcoder/p/5511676.html)
+
+### [更优雅地使用Masonry](https://www.jianshu.com/p/aa93135af8c9)
+
