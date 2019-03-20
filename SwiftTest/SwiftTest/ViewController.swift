@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
     
     // 懒加载:使用的时候一定不为空,只会初始化一次
     lazy var nameLabel = UILabel()
+    
+    var redView = UIView()
+    var blueView = UIView()
+    
+    
     
     // 通过有返回值的闭包来实现懒加载
     lazy var ageLabel: UILabel = {
@@ -27,8 +33,10 @@ class ViewController: UIViewController {
         self.nameLabel.frame = CGRect(x: 10, y: 100, width: 200, height: 100)
         self.view.addSubview(self.nameLabel)
         self.view.addSubview(self.ageLabel)
+        self.nameLabel.text = "name"
+        self.ageLabel.text = "age"
 
-        
+        // VFL
         let constraintArrayH = NSLayoutConstraint.constraints(withVisualFormat: "H:|-60-[ageLabel]-60-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["ageLabel" : self.ageLabel])
         let constraintArrayV = NSLayoutConstraint.constraints(withVisualFormat: "V:|-160-[redView(200)]", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["redView":self.ageLabel])
         
@@ -56,8 +64,32 @@ class ViewController: UIViewController {
         HttpTool.shareHttpTool().block = {
             [weak self](result: String) in
             
-            self?.nameLabel.text = result
+            self?.nameLabel.text = result + ": ok!"
             self?.ageLabel.text = result + ": 20"
+        }
+        
+        // SnapKit
+        self.view.addSubview(redView)
+        self.view.addSubview(blueView)
+        redView.backgroundColor = UIColor.red
+        blueView.backgroundColor = UIColor.blue
+        
+        redView.snp.makeConstraints { (make) in
+//            make.left.equalTo(ageLabel).offset(20)
+//            make.top.equalTo(ageLabel).offset(20)
+//            make.width.greaterThanOrEqualTo(1);
+//            make.height.greaterThanOrEqualTo(1);
+            make.edges.equalTo(UIEdgeInsets(top: 600, left: 100, bottom: 200, right: 100))
+        }
+        
+        blueView.snp.makeConstraints { (make) in
+//            make.right.equalToSuperview().offset(-20)
+//            make.centerY.equalToSuperview();
+            make.center.equalToSuperview();
+            make.width.equalTo(ageLabel.snp.width);
+            make.height.equalTo(ageLabel.snp.height);
+//            make.height.equalTo(100);
+//            make.width.equalTo(200);
         }
     }
     
